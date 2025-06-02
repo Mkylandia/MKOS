@@ -1,163 +1,163 @@
 /* Basis-Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    height: 100vh;
-    overflow: hidden;
-    user-select: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
 }
 
 /* Desktop-Fläche */
 .desktop {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
 }
 
 /* Floating Icons */
 .floating-icons {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
 }
 
 .desktop-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .desktop-icon:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .desktop-icon-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: white;
-    margin-bottom: 8px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s ease;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  margin-bottom: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
 }
 
 .desktop-icon-image:hover {
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
 }
 
 .desktop-icon-label {
-    color: white;
-    font-size: 12px;
-    text-align: center;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Widgets rechts oben */
 .desktop-widgets {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .widget {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .widget:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .time-widget {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    text-align: center;
-    color: white;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  text-align: center;
+  color: white;
 }
 
 .time-widget h3 {
-    font-size: 28px;
-    margin-bottom: 5px;
+  font-size: 28px;
+  margin-bottom: 5px;
 }
 
 .time-widget p {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .weather-widget {
-    background: linear-gradient(135deg, #74b9ff, #0984e3);
-    color: white;
-    text-align: center;
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  color: white;
+  text-align: center;
 }
 
 .weather-widget h3 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .weather-temp,
 .weather-location {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 /* Taskbar am unteren Bildschirmrand */
 .taskbar {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    border-radius: 20px 20px 0 0;
-    padding: 10px 20px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .app-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 24px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .app-icon:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Farben für die einzelnen Icons */
@@ -175,119 +175,138 @@ body {
 
 /* Fenster (modale Fenster) */
 .window {
-    position: absolute;
-    display: none;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    min-width: 400px;
-    min-height: 300px;
-    resize: both;
-    overflow: hidden;
-    transition: opacity 0.3s ease;
+  position: absolute;
+  display: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 400px;
+  min-height: 200px;
+  resize: both;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
 }
 
 .window.show {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
 }
 
 .window.hide {
-    opacity: 0;
-    transition: opacity 0.2s ease;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 /* Fenster-Kopfzeile */
 .window-header {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 12px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: move;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .window-title {
-    font-weight: 600;
-    color: #333;
+  font-weight: 600;
+  color: #333;
 }
 
 .window-controls {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 .window-control {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .window-control:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
-.close    { background: #ff5f56; }
-.minimize { background: #ffbd2e; }
-.maximize { background: #27ca3f; }
+.close {
+  background: #ff5f56;
+}
 
 /* Fenster-Inhalt */
 .window-content {
-    padding: 0;
-    height: calc(100% - 48px);
-    overflow: hidden;
+  padding: 20px;
+  height: calc(100% - 44px);
+  overflow: auto;
 }
 
-.window-content iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+.window-content p {
+  margin-bottom: 15px;
+}
+
+.open-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: #4285f4;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.open-button:hover {
+  background: #396de3;
 }
 
 /* Google-Widgets innerhalb des Google-Fensters */
 .widget-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
 }
 
 .search-widget input {
-    width: 100%;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    font-size: 14px;
-    transition: background 0.3s ease;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #2c3e50;
+  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
 .search-widget input:focus {
-    background: rgba(255, 255, 255, 0.3);
-    outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
 }
 
 .search-widget input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+  color: rgba(44, 62, 80, 0.6);
 }
 
 .widget button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    background: #4285f4;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: #4285f4;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .widget button:hover {
-    background: #396de3;
+  background: #396de3;
+}
+
+/* Eingebetteter Films-Frame */
+.window-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
 }
