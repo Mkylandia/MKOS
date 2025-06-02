@@ -1,475 +1,431 @@
-/* Basis-Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MKOS V2 – Polished Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="desktop">
+    <!-- Desktop Icons -->
+    <div class="floating-icons">
+      <div class="desktop-icon" onclick="openApp('youtube')">
+        <div class="desktop-icon-image youtube">📺</div>
+        <div class="desktop-icon-label">YouTube</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('telegram')">
+        <div class="desktop-icon-image telegram">✈️</div>
+        <div class="desktop-icon-label">Telegram</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('instagram')">
+        <div class="desktop-icon-image instagram">📷</div>
+        <div class="desktop-icon-label">Instagram</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('crazygames')">
+        <div class="desktop-icon-image crazygames">🎮</div>
+        <div class="desktop-icon-label">CrazyGames</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('films')">
+        <div class="desktop-icon-image films">🎬</div>
+        <div class="desktop-icon-label">Films</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('google')">
+        <div class="desktop-icon-image google">🔍</div>
+        <div class="desktop-icon-label">Google</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('twitter')">
+        <div class="desktop-icon-image twitter">🐦</div>
+        <div class="desktop-icon-label">Twitter</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('github')">
+        <div class="desktop-icon-image github">🐙</div>
+        <div class="desktop-icon-label">GitHub</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('stackoverflow')">
+        <div class="desktop-icon-image stackoverflow">🧱</div>
+        <div class="desktop-icon-label">StackOverflow</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('wikipedia')">
+        <div class="desktop-icon-image wikipedia">📚</div>
+        <div class="desktop-icon-label">Wikipedia</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('calculator')">
+        <div class="desktop-icon-image calculator">🧮</div>
+        <div class="desktop-icon-label">Rechner</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('notes')">
+        <div class="desktop-icon-image notes">📝</div>
+        <div class="desktop-icon-label">Notizen</div>
+      </div>
+    </div>
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  height: 100vh;
-  overflow: hidden;
-  user-select: none;
-}
+    <!-- Widgets rechts oben -->
+    <div class="desktop-widgets">
+      <div class="widget time-widget floating">
+        <h3 id="current-time">--:--</h3>
+        <p id="current-date">--, -- -- ----</p>
+      </div>
+      <div class="widget weather-widget">
+        <h3>🌤️ Wetter</h3>
+        <p class="weather-temp">22 °C – Teilweise bewölkt</p>
+        <p class="weather-location">Heidenheim, Deutschland</p>
+      </div>
+    </div>
 
-/* Desktop-Fläche */
-.desktop {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-}
+    <!-- Taskbar am unteren Bildschirmrand -->
+    <div class="taskbar">
+      <div class="app-icon start-button" onclick="showStartMenu()">🏠</div>
+      <div class="app-icon youtube" onclick="openApp('youtube')">📺</div>
+      <div class="app-icon telegram" onclick="openApp('telegram')">✈️</div>
+      <div class="app-icon instagram" onclick="openApp('instagram')">📷</div>
+      <div class="app-icon crazygames" onclick="openApp('crazygames')">🎮</div>
+      <div class="app-icon films" onclick="openApp('films')">🎬</div>
+      <div class="app-icon google" onclick="openApp('google')">🔍</div>
+      <div class="app-icon twitter" onclick="openApp('twitter')">🐦</div>
+      <div class="app-icon github" onclick="openApp('github')">🐙</div>
+      <div class="app-icon stackoverflow" onclick="openApp('stackoverflow')">🧱</div>
+      <div class="app-icon wikipedia" onclick="openApp('wikipedia')">📚</div>
+      <div class="app-icon calculator" onclick="openApp('calculator')">🧮</div>
+      <div class="app-icon notes" onclick="openApp('notes')">📝</div>
+    </div>
+  </div>
 
-/* Floating Icons */
-.floating-icons {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-}
+  <!-- App Windows -->
 
-.desktop-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
+  <!-- YouTube: Player + Direkt-Öffnen + Fullscreen -->
+  <div id="youtube-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📺 YouTube</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('youtube')"></div>
+        <div class="window-control close" onclick="closeApp('youtube')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="youtube-player">
+        <input type="text" id="youtube-search" placeholder="YouTube-Suchbegriff eingeben..." />
+        <button onclick="searchYouTube()">Suchen</button>
+        <button class="open-browser" onclick="openURL('https://www.youtube.com')">
+          YouTube im Browser öffnen
+        </button>
+        <div class="video-container" id="video-container">
+          <p>Ergebnisvideo erscheint hier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-.desktop-icon:hover {
-  transform: scale(1.1);
-}
+  <!-- Telegram -->
+  <div id="telegram-window" class="window">
+    <div class="window-header">
+      <div class="window-title">✈️ Telegram</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('telegram')"></div>
+        <div class="window-control close" onclick="closeApp('telegram')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="app-links">
+        <a href="https://web.telegram.org" target="_blank" class="app-link">
+          <div class="app-link-icon">🌐</div>
+          <div class="app-link-info">
+            <h4>Telegram Web</h4>
+            <p>Browser-Version öffnen</p>
+          </div>
+        </a>
+        <a href="https://desktop.telegram.org" target="_blank" class="app-link">
+          <div class="app-link-icon">💻</div>
+          <div class="app-link-info">
+            <h4>Desktop App</h4>
+            <p>Desktop-Version herunterladen</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-.desktop-icon-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  color: white;
-  margin-bottom: 8px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.3s ease;
-}
+  <!-- Instagram -->
+  <div id="instagram-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📷 Instagram</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('instagram')"></div>
+        <div class="window-control close" onclick="closeApp('instagram')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="app-links">
+        <a href="https://www.instagram.com" target="_blank" class="app-link">
+          <div class="app-link-icon">📱</div>
+          <div class="app-link-info">
+            <h4>Instagram Web</h4>
+            <p>Browser-Version öffnen</p>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/explore/" target="_blank" class="app-link">
+          <div class="app-link-icon">🔍</div>
+          <div class="app-link-info">
+            <h4>Entdecken</h4>
+            <p>Neue Inhalte anzeigen</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-.desktop-icon-image:hover {
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-}
+  <!-- CrazyGames -->
+  <div id="crazygames-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🎮 CrazyGames</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('crazygames')"></div>
+        <div class="window-control close" onclick="closeApp('crazygames')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <iframe src="https://www.crazygames.com" title="CrazyGames"></iframe>
+    </div>
+  </div>
 
-.desktop-icon-label {
-  color: white;
-  font-size: 12px;
-  text-align: center;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
+  <!-- Films -->
+  <div id="films-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🎬 Films</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('films')"></div>
+        <div class="window-control close" onclick="closeApp('films')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <iframe src="https://mkylandia.github.io/Films/" title="Films"></iframe>
+    </div>
+  </div>
 
-/* Widgets rechts oben */
-.desktop-widgets {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  <!-- Google Dashboard -->
+  <div id="google-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🔍 Google Dashboard</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('google')"></div>
+        <div class="window-control close" onclick="closeApp('google')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="widget-grid">
+        <div class="widget search-widget">
+          <h3>🔍 Google Suche</h3>
+          <input type="text" placeholder="Suche..." onkeypress="googleSearch(event)" />
+        </div>
+        <div class="widget">
+          <h3>📧 Gmail</h3>
+          <p>Schnellzugriff auf deine E-Mails</p>
+          <button onclick="openURL('https://mail.google.com')">Gmail öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>📅 Kalender</h3>
+          <p>Deine Termine im Überblick</p>
+          <button onclick="openURL('https://calendar.google.com')">Kalender öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>💾 Drive</h3>
+          <p>Deine Dateien in der Cloud</p>
+          <button onclick="openURL('https://drive.google.com')">Drive öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>🗺️ Maps</h3>
+          <p>Navigation und Karten</p>
+          <button onclick="openURL('https://maps.google.com')">Maps öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>📺 YouTube</h3>
+          <p>Videos und Musik</p>
+          <button onclick="openURL('https://www.youtube.com')">YouTube öffnen</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-.widget {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  <!-- Twitter -->
+  <div id="twitter-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🐦 Twitter</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('twitter')"></div>
+        <div class="window-control close" onclick="closeApp('twitter')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="app-links">
+        <a href="https://twitter.com" target="_blank" class="app-link">
+          <div class="app-link-icon">🐦</div>
+          <div class="app-link-info">
+            <h4>Twitter / X</h4>
+            <p>Öffne Twitter im Browser</p>
+          </div>
+        </a>
+        <a href="https://twitter.com/explore" target="_blank" class="app-link">
+          <div class="app-link-icon">🔥</div>
+          <div class="app-link-info">
+            <h4>Trending</h4>
+            <p>Entdecke was gerade angesagt ist</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-.widget:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
+  <!-- GitHub -->
+  <div id="github-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🐙 GitHub</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('github')"></div>
+        <div class="window-control close" onclick="closeApp('github')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="app-links">
+        <a href="https://github.com" target="_blank" class="app-link">
+          <div class="app-link-icon">🐙</div>
+          <div class="app-link-info">
+            <h4>GitHub</h4>
+            <p>Öffne GitHub im Browser</p>
+          </div>
+        </a>
+        <a href="https://github.com/explore" target="_blank" class="app-link">
+          <div class="app-link-icon">🔍</div>
+          <div class="app-link-info">
+            <h4>Explore</h4>
+            <p>Entdecke neue Repositories</p>
+          </div>
+        </a>
+        <a href="https://github.com/trending" target="_blank" class="app-link">
+          <div class="app-link-icon">📈</div>
+          <div class="app-link-info">
+            <h4>Trending</h4>
+            <p>Beliebte Projekte heute</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-.time-widget {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  text-align: center;
-  color: white;
-}
+  <!-- StackOverflow -->
+  <div id="stackoverflow-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🧱 StackOverflow</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('stackoverflow')"></div>
+        <div class="window-control close" onclick="closeApp('stackoverflow')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="app-links">
+        <a href="https://stackoverflow.com" target="_blank" class="app-link">
+          <div class="app-link-icon">🧱</div>
+          <div class="app-link-info">
+            <h4>StackOverflow</h4>
+            <p>Fragen und Antworten für Entwickler</p>
+          </div>
+        </a>
+        <a href="https://stackoverflow.com/questions" target="_blank" class="app-link">
+          <div class="app-link-icon">❓</div>
+          <div class="app-link-info">
+            <h4>Fragen</h4>
+            <p>Durchsuche alle Fragen</p>
+          </div>
+        </a>
+        <a href="https://stackoverflow.com/tags" target="_blank" class="app-link">
+          <div class="app-link-icon">🏷️</div>
+          <div class="app-link-info">
+            <h4>Tags</h4>
+            <p>Finde Fragen nach Technologie</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-.time-widget h3 {
-  font-size: 28px;
-  margin-bottom: 5px;
-}
+  <!-- Wikipedia (analog zu Twitter) -->
+  <div id="wikipedia-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📚 Wikipedia</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('wikipedia')"></div>
+        <div class="window-control close" onclick="closeApp('wikipedia')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="app-links">
+        <a href="https://de.wikipedia.org" target="_blank" class="app-link">
+          <div class="app-link-icon">🌐</div>
+          <div class="app-link-info">
+            <h4>Wikipedia DE</h4>
+            <p>Hauptseite öffnen</p>
+          </div>
+        </a>
+        <a href="https://de.wikipedia.org/wiki/Spezial:Suche" target="_blank" class="app-link">
+          <div class="app-link-icon">🔍</div>
+          <div class="app-link-info">
+            <h4>Suche</h4>
+            <p>Artikel suchen</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-.time-widget p {
-  font-size: 14px;
-}
+  <!-- Rechner (Calculator) -->
+  <div id="calculator-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🧮 Rechner</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('calculator')"></div>
+        <div class="window-control close" onclick="closeApp('calculator')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="calculator">
+        <input type="text" id="calc-display" readonly />
+        <div class="calc-buttons">
+          <button onclick="appendCalc('7')">7</button>
+          <button onclick="appendCalc('8')">8</button>
+          <button onclick="appendCalc('9')">9</button>
+          <button onclick="appendCalc('/')">÷</button>
+          <button onclick="appendCalc('4')">4</button>
+          <button onclick="appendCalc('5')">5</button>
+          <button onclick="appendCalc('6')">6</button>
+          <button onclick="appendCalc('*')">×</button>
+          <button onclick="appendCalc('1')">1</button>
+          <button onclick="appendCalc('2')">2</button>
+          <button onclick="appendCalc('3')">3</button>
+          <button onclick="appendCalc('-')">−</button>
+          <button onclick="appendCalc('0')">0</button>
+          <button onclick="appendCalc('.')">.</button>
+          <button onclick="calculateResult()">=</button>
+          <button onclick="appendCalc('+')">+</button>
+          <button onclick="clearCalc()">C</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-.weather-widget {
-  background: linear-gradient(135deg, #74b9ff, #0984e3);
-  color: white;
-  text-align: center;
-}
+  <!-- Notizen (Notes) -->
+  <div id="notes-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📝 Notizen</div>
+      <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('notes')"></div>
+        <div class="window-control close" onclick="closeApp('notes')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <textarea id="notes-area" placeholder="Hier deine Notizen eingeben..."></textarea>
+      <button class="open-button" onclick="downloadNotes()">Notizen herunterladen</button>
+    </div>
+  </div>
 
-.weather-widget h3 {
-  margin-bottom: 10px;
-}
-
-.weather-temp,
-.weather-location {
-  font-size: 14px;
-}
-
-/* Taskbar am unteren Bildschirmrand */
-.taskbar {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(20px);
-  border-radius: 20px 20px 0 0;
-  padding: 10px 20px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.app-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 24px;
-  color: white;
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.app-icon:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* Farben für die einzelnen Icons */
-.youtube        { background: linear-gradient(135deg, #ff0000, #cc0000); }
-.telegram       { background: linear-gradient(135deg, #0088cc, #005580); }
-.instagram      { background: linear-gradient(135deg, #e4405f, #833ab4, #fd1d1d, #fcb045); }
-.crazygames     { background: linear-gradient(135deg, #ff6b35, #f7931e); }
-.films          { background: linear-gradient(135deg, #2c3e50, #34495e); }
-.google         { background: linear-gradient(135deg, #4285f4, #34a853); }
-.twitter        { background: linear-gradient(135deg, #1da1f2, #0d8ddb); }
-.github         { background: linear-gradient(135deg, #333333, #6e5494); }
-.stackoverflow  { background: linear-gradient(135deg, #f48024, #e06f13); }
-.wikipedia      { background: linear-gradient(135deg, #000000, #666666); }
-.calculator     { background: linear-gradient(135deg, #4caf50, #087f23); }
-.notes          { background: linear-gradient(135deg, #ffeb3b, #fbc02d); }
-.start-button   { background: linear-gradient(135deg, #667eea, #764ba2); border: 2px solid rgba(255, 255, 255, 0.2); }
-
-/* Fenster (modale Fenster) */
-.window {
-  position: absolute;
-  display: none;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  min-width: 400px;
-  min-height: 300px;
-  max-width: 90vw;
-  max-height: 90vh;
-  resize: both; /* Fenster ist resizable */
-  overflow: auto; /* nötig für resize */
-  transition: opacity 0.3s ease;
-}
-
-.window.show {
-  display: block;
-  opacity: 1;
-}
-
-.window.hide {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-/* Fenster-Kopfzeile */
-.window-header {
-  background: rgba(0, 0, 0, 0.05);
-  padding: 12px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: move;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 15px 15px 0 0;
-}
-
-.window-title {
-  font-weight: 600;
-  color: #333;
-}
-
-.window-controls {
-  display: flex;
-  gap: 8px;
-}
-
-.window-control {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.window-control:hover {
-  transform: scale(1.2);
-}
-
-.close {
-  background: #ff5f56;
-}
-
-/* Fenster-Inhalt */
-.window-content {
-  padding: 0;
-  height: calc(100% - 44px);
-  overflow: auto;
-}
-
-.window-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.window-content p {
-  padding: 20px;
-  font-size: 14px;
-  color: #333;
-}
-
-.open-button {
-  margin: 0 20px 20px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  background: #4285f4;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.open-button:hover {
-  background: #396de3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
-}
-
-/* Google-Widgets innerhalb des Google-Fensters */
-.widget-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.search-widget input {
-  width: 100%;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #2c3e50;
-  font-size: 14px;
-  transition: background 0.3s ease;
-}
-
-.search-widget input:focus {
-  background: rgba(255, 255, 255, 0.3);
-  outline: none;
-}
-
-.search-widget input::placeholder {
-  color: rgba(44, 62, 80, 0.6);
-}
-
-.widget button {
-  margin-top: 10px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background: #4285f4;
-  color: white;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.3s ease;
-}
-
-.widget button:hover {
-  background: #396de3;
-  transform: translateY(-1px);
-}
-
-/* YouTube-Suche */
-.youtube-player {
-  padding: 20px;
-  text-align: center;
-}
-
-.youtube-player input {
-  width: 60%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-right: 10px;
-  font-size: 14px;
-}
-
-.youtube-player button {
-  padding: 10px 16px;
-  margin-right: 10px;
-  background: #ff0000;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-}
-
-.youtube-player button:hover {
-  background: #cc0000;
-}
-
-.video-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.video-container iframe {
-  max-width: 100%;
-  height: 300px;
-  border-radius: 8px;
-}
-
-/* App-Links */
-.app-links {
-  padding: 20px;
-  display: grid;
-  gap: 15px;
-}
-
-.app-link {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  text-decoration: none;
-  color: #333;
-  transition: all 0.3s ease;
-}
-
-.app-link:hover {
-  background: rgba(0, 0, 0, 0.1);
-  transform: translateX(5px);
-}
-
-.app-link-icon {
-  font-size: 24px;
-  margin-right: 15px;
-}
-
-.app-link-info h4 {
-  margin: 0 0 5px 0;
-  font-size: 16px;
-}
-
-.app-link-info p {
-  margin: 0;
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-/* Wikipedia-Artikel */
-#wiki-content {
-  padding: 20px;
-  line-height: 1.6;
-  color: #333;
-}
-
-#wiki-content h1,
-#wiki-content h2,
-#wiki-content h3 {
-  margin: 20px 0 10px 0;
-  color: #2c3e50;
-}
-
-#wiki-content p {
-  margin-bottom: 15px;
-  padding: 0;
-}
-
-/* Rechner */
-.calculator {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#calc-display {
-  width: 80%;
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 15px;
-  text-align: right;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
-.calc-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.calc-buttons button {
-  padding: 15px;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  background: #f0f0f0;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.calc-buttons button:hover {
-  background: #e0e0e0;
-}
-
-/* Notizen */
-#notes-area {
-  width: 90%;
-  height: 60%;
-  margin: 20px;
-  font-size: 14px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  resize: vertical;
-}
+  <script src="script.js"></script>
+</body>
+</html>
