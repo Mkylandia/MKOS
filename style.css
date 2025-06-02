@@ -238,16 +238,26 @@ body {
 
 /* Fenster-Inhalt */
 .window-content {
-  padding: 20px;
+  padding: 0;
   height: calc(100% - 44px);
-  overflow: auto;
+  overflow: hidden;
+}
+
+.window-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
 }
 
 .window-content p {
-  margin-bottom: 15px;
+  padding: 20px;
+  font-size: 14px;
+  color: #333;
 }
 
 .open-button {
+  margin: 0 20px 20px;
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
@@ -266,6 +276,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
+  padding: 20px;
 }
 
 .search-widget input {
@@ -301,12 +312,4 @@ body {
 
 .widget button:hover {
   background: #396de3;
-}
-
-/* Eingebetteter Films-Frame */
-.window-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 8px;
 }
