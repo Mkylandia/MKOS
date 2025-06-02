@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKOS V1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="desktop">
+        <!-- Desktop Icons -->
+        <div class="floating-icons">
+            <div class="desktop-icon" onclick="openApp('youtube')">
+                <div class="desktop-icon-image youtube">📺</div>
+                <div class="desktop-icon-label">YouTube</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('telegram')">
+                <div class="desktop-icon-image telegram">✈️</div>
+                <div class="desktop-icon-label">Telegram</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('instagram')">
+                <div class="desktop-icon-image instagram">📷</div>
+                <div class="desktop-icon-label">Instagram</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('crazygames')">
+                <div class="desktop-icon-image crazygames">🎮</div>
+                <div class="desktop-icon-label">CrazyGames</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('films')">
+                <div class="desktop-icon-image films">🎬</div>
+                <div class="desktop-icon-label">Films</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('google')">
+                <div class="desktop-icon-image google">🔍</div>
+                <div class="desktop-icon-label">Google</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('ai')">
+                <div class="desktop-icon-image ai-assistant">🤖</div>
+                <div class="desktop-icon-label">MK Assistant</div>
+            </div>
+        </div>
+
+        <!-- Widgets auf Desktop -->
+        <div style="position: absolute; top: 50px; right: 50px;">
+            <div class="widget time-widget floating" style="margin-bottom: 20px;">
+                <h3 id="current-time">12:34</h3>
+                <p id="current-date">Montag, 2. Juni 2025</p>
+            </div>
+            <div class="widget weather-widget">
+                <h3>🌤️ Wetter</h3>
+                <p>22°C - Teilweise bewölkt</p>
+                <p>Heidenheim, Deutschland</p>
+            </div>
+        </div>
+
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <a href="#" class="app-icon start-button" onclick="showStartMenu()">🏠</a>
+            <a href="#" class="app-icon youtube" onclick="openApp('youtube')">📺</a>
+            <a href="#" class="app-icon telegram" onclick="openApp('telegram')">✈️</a>
+            <a href="#" class="app-icon instagram" onclick="openApp('instagram')">📷</a>
+            <a href="#" class="app-icon crazygames" onclick="openApp('crazygames')">🎮</a>
+            <a href="#" class="app-icon films" onclick="openApp('films')">🎬</a>
+            <a href="#" class="app-icon google" onclick="openApp('google')">🔍</a>
+            <a href="#" class="app-icon ai-assistant" onclick="openApp('ai')">🤖</a>
+        </div>
+    </div>
+
+    <div id="ai-window" class="window">
+        <div class="window-header">
+            <div class="window-title">🤖 MK Assistant - AI Chat</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('ai-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="ai-chat-container">
+                <div class="ai-header">
+                    <div class="ai-status"></div>
+                    <span><strong>MK Assistant</strong> - Powered by DeepSeek V3</span>
+                </div>
+                <div class="ai-chat-messages" id="ai-chat-messages">
+                    <div class="ai-message ai-message-content">
+                        👋 Hallo! Ich bin MK, dein persönlicher AI-Assistant für MKOS V1. Ich kann dir bei verschiedenen Aufgaben helfen:
+                        <br><br>
+                        • 💡 Fragen beantworten und erklären<br>
+                        • 📝 Texte schreiben und korrigieren<br>
+                        • 🧮 Berechnungen durchführen<br>
+                        • 💻 Programmierung unterstützen<br>
+                        • 🎨 Kreative Ideen entwickeln<br>
+                        <br>
+                        Wie kann ich dir heute helfen?
+                        <div class="message-time" id="welcome-time"></div>
+                    </div>
+                </div>
+                <div class="ai-suggestions" id="ai-suggestions">
+                    <div class="suggestion-chip" onclick="sendSuggestion('Erkläre mir Quantencomputing')">🔬 Quantencomputing</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Schreibe ein kreatives Gedicht')">📝 Gedicht schreiben</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Hilf mir beim Programmieren')">💻 Code-Hilfe</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Was sind die neusten Tech-Trends?')">🚀 Tech-Trends</div>
+                </div>
+                <div class="ai-typing" id="ai-typing">
+                    <span>🤖 MK denkt nach</span>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+                <div class="ai-input-container">
+                    <input type="text" class="ai-input" id="ai-input" placeholder="Frag mich alles... 💭" onkeypress="handleAIInput(event)">
+                    <button class="ai-send-btn" id="ai-send-btn" onclick="sendAIMessage()" title="Nachricht senden">🚀</button>
+                </div>
+                <div class="ai-stats" id="ai-stats">
+                    MK ist bereit • DeepSeek V3 • Gespräch: 0 Nachrichten
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Windows -->
+    <div id="youtube-window" class="window">
+        <div class="window-header">
+            <div class="window-title">📺 YouTube</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('youtube-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <iframe src="https://www.youtube.com"></iframe>
+        </div>
+    </div>
+
+    <div id="telegram-window" class="window">
+        <div class="window-header">
+            <div class="window-title">✈️ Telegram Web</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('telegram-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <iframe src="https://web.telegram.org"></iframe>
+        </div>
+    </div>
+
+    <div id="instagram-window" class="window">
+        <div class="window-header">
+            <div class="window-title">📷 Instagram</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('instagram-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <iframe src="https://www.instagram.com"></iframe>
+        </div>
+    </div>
+
+    <div id="crazygames-window" class="window">
+        <div class="window-header">
+            <div class="window-title">🎮 CrazyGames</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('crazygames-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <iframe src="https://www.crazygames.com"></iframe>
+        </div>
+    </div>
+
+    <div id="films-window" class="window">
+        <div class="window-header">
+            <div class="window-title">🎬 Films</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('films-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <iframe src="https://mkylandia.github.io/Films/"></iframe>
+        </div>
+    </div>
+
+    <div id="google-window" class="window">
+        <div class="window-header">
+            <div class="window-title">🔍 Google Dashboard</div>
+            <div class="window-controls">
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
+                <div class="window-control close" onclick="closeWindow('google-window')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="widget-grid">
+                <div class="widget search-widget">
+                    <h3>🔍 Google Suche</h3>
+                    <input type="text" placeholder="Suche..." onkeypress="googleSearch(event)">
+                </div>
+                <div class="widget">
+                    <h3>📧 Gmail</h3>
+                    <p>Schnellzugriff auf deine E-Mails</p>
+                    <button onclick="window.open('https://gmail.com', '_blank')" style="margin-top: 10px; padding: 8px 16px; background: #4285f4; color: white; border: none; border-radius: 5px; cursor: pointer;">Öffnen</button>
+                </div>
+                <div class="widget">
+                    <h3>📅 Kalender</h3>
+                    <p>Deine Termine im Überblick</p>
+                    <button onclick="window.open('https://calendar.google.com', '_blank')" style="margin-top: 10px; padding: 8px 16px; background: #34a853; color: white; border: none; border-radius: 5px; cursor: pointer;">Öffnen</button>
+                </div>
+                <div class="widget">
+                    <h3>💾 Drive</h3>
+                    <p>Deine Dateien in der Cloud</p>
+                    <button onclick="window.open('https://drive.google.com', '_blank')" style="margin-top: 10px; padding: 8px 16px; background: #fbbc04; color: black; border: none; border-radius: 5px; cursor: pointer;">Öffnen</button>
+                </div>
+                <div class="widget">
+                    <h3>🗺️ Maps</h3>
+                    <p>Navigation und Karten</p>
+                    <button onclick="window.open('https://maps.google.com', '_blank')" style="margin-top: 10px; padding: 8px 16px; background: #ea4335; color: white; border: none; border-radius: 5px; cursor: pointer;">Öffnen</button>
+                </div>
+                <div class="widget">
+                    <h3>📺 YouTube</h3>
+                    <p>Videos und Musik</p>
+                    <button onclick="window.open('https://youtube.com', '_blank')" style="margin-top: 10px; padding: 8px 16px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer;">Öffnen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
