@@ -34,10 +34,6 @@
                 <div class="desktop-icon-image google">🔍</div>
                 <div class="desktop-icon-label">Google</div>
             </div>
-            <div class="desktop-icon" onclick="openApp('ai')">
-                <div class="desktop-icon-image ai-assistant">🤖</div>
-                <div class="desktop-icon-label">MK Assistant</div>
-            </div>
         </div>
 
         <!-- Widgets auf Desktop -->
@@ -62,61 +58,6 @@
             <a href="#" class="app-icon crazygames" onclick="openApp('crazygames')">🎮</a>
             <a href="#" class="app-icon films" onclick="openApp('films')">🎬</a>
             <a href="#" class="app-icon google" onclick="openApp('google')">🔍</a>
-            <a href="#" class="app-icon ai-assistant" onclick="openApp('ai')">🤖</a>
-        </div>
-    </div>
-
-    <div id="ai-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🤖 MK Assistant - AI Chat</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeWindow('ai-window')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <div class="ai-chat-container">
-                <div class="ai-header">
-                    <div class="ai-status"></div>
-                    <span><strong>MK Assistant</strong> - Powered by DeepSeek V3</span>
-                </div>
-                <div class="ai-chat-messages" id="ai-chat-messages">
-                    <div class="ai-message ai-message-content">
-                        👋 Hallo! Ich bin MK, dein persönlicher AI-Assistant für MKOS V1. Ich kann dir bei verschiedenen Aufgaben helfen:
-                        <br><br>
-                        • 💡 Fragen beantworten und erklären<br>
-                        • 📝 Texte schreiben und korrigieren<br>
-                        • 🧮 Berechnungen durchführen<br>
-                        • 💻 Programmierung unterstützen<br>
-                        • 🎨 Kreative Ideen entwickeln<br>
-                        <br>
-                        Wie kann ich dir heute helfen?
-                        <div class="message-time" id="welcome-time"></div>
-                    </div>
-                </div>
-                <div class="ai-suggestions" id="ai-suggestions">
-                    <div class="suggestion-chip" onclick="sendSuggestion('Erkläre mir Quantencomputing')">🔬 Quantencomputing</div>
-                    <div class="suggestion-chip" onclick="sendSuggestion('Schreibe ein kreatives Gedicht')">📝 Gedicht schreiben</div>
-                    <div class="suggestion-chip" onclick="sendSuggestion('Hilf mir beim Programmieren')">💻 Code-Hilfe</div>
-                    <div class="suggestion-chip" onclick="sendSuggestion('Was sind die neusten Tech-Trends?')">🚀 Tech-Trends</div>
-                </div>
-                <div class="ai-typing" id="ai-typing">
-                    <span>🤖 MK denkt nach</span>
-                    <div class="typing-dots">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    </div>
-                </div>
-                <div class="ai-input-container">
-                    <input type="text" class="ai-input" id="ai-input" placeholder="Frag mich alles... 💭" onkeypress="handleAIInput(event)">
-                    <button class="ai-send-btn" id="ai-send-btn" onclick="sendAIMessage()" title="Nachricht senden">🚀</button>
-                </div>
-                <div class="ai-stats" id="ai-stats">
-                    MK ist bereit • DeepSeek V3 • Gespräch: 0 Nachrichten
-                </div>
-            </div>
         </div>
     </div>
 
