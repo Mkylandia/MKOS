@@ -83,7 +83,7 @@
 
   <!-- App Windows -->
 
-  <!-- YouTube: Embed eines Beispielvideos -->
+  <!-- YouTube: Verbesserter Player -->
   <div id="youtube-window" class="window">
     <div class="window-header">
       <div class="window-title">📺 YouTube</div>
@@ -92,33 +92,45 @@
       </div>
     </div>
     <div class="window-content">
-      <iframe
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="YouTube Video"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+      <div class="youtube-player">
+        <input type="text" id="youtube-search" placeholder="Nach YouTube Videos suchen..." />
+        <button onclick="searchYouTube()">Suchen</button>
+        <div class="video-container" id="video-container">
+          <p>Gib einen Suchbegriff ein, um YouTube Videos zu finden!</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Telegram: Fallback auf neuen Tab -->
+  <!-- Telegram -->
   <div id="telegram-window" class="window">
     <div class="window-header">
-      <div class="window-title">✈️ Telegram Web</div>
+      <div class="window-title">✈️ Telegram</div>
       <div class="window-controls">
         <div class="window-control close" onclick="closeApp('telegram')"></div>
       </div>
     </div>
     <div class="window-content">
-      <p>Telegram in einem neuen Tab öffnen:</p>
-      <button class="open-button" onclick="openURL('https://web.telegram.org')">
-        Telegram Web öffnen
-      </button>
+      <div class="app-links">
+        <a href="https://web.telegram.org" target="_blank" class="app-link">
+          <div class="app-link-icon">🌐</div>
+          <div class="app-link-info">
+            <h4>Telegram Web</h4>
+            <p>Öffne Telegram im Browser</p>
+          </div>
+        </a>
+        <a href="https://desktop.telegram.org" target="_blank" class="app-link">
+          <div class="app-link-icon">💻</div>
+          <div class="app-link-info">
+            <h4>Desktop App</h4>
+            <p>Lade die Telegram Desktop App herunter</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- Instagram: Embed eines Beispiel-Posts -->
+  <!-- Instagram -->
   <div id="instagram-window" class="window">
     <div class="window-header">
       <div class="window-title">📷 Instagram</div>
@@ -127,14 +139,26 @@
       </div>
     </div>
     <div class="window-content">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Be8R_4gJcSz/" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0 auto; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-      </blockquote>
-      <script async defer src="https://www.instagram.com/embed.js"></script>
-      <p style="margin-top:10px;">Falls nicht angezeigt, <button class="open-button" onclick="openURL('https://www.instagram.com')">Instagram in neuem Tab öffnen</button>.</p>
+      <div class="app-links">
+        <a href="https://www.instagram.com" target="_blank" class="app-link">
+          <div class="app-link-icon">📱</div>
+          <div class="app-link-info">
+            <h4>Instagram Web</h4>
+            <p>Öffne Instagram im Browser</p>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/explore/" target="_blank" class="app-link">
+          <div class="app-link-icon">🔍</div>
+          <div class="app-link-info">
+            <h4>Entdecken</h4>
+            <p>Erkunde neue Inhalte</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- CrazyGames: Embed erlaubt -->
+  <!-- CrazyGames -->
   <div id="crazygames-window" class="window">
     <div class="window-header">
       <div class="window-title">🎮 CrazyGames</div>
@@ -147,7 +171,7 @@
     </div>
   </div>
 
-  <!-- Films: Embed erlaubt -->
+  <!-- Films -->
   <div id="films-window" class="window">
     <div class="window-header">
       <div class="window-title">🎬 Films</div>
@@ -160,7 +184,7 @@
     </div>
   </div>
 
-  <!-- Google Dashboard: Widgets & Suche -->
+  <!-- Google Dashboard -->
   <div id="google-window" class="window">
     <div class="window-header">
       <div class="window-title">🔍 Google Dashboard</div>
@@ -172,11 +196,7 @@
       <div class="widget-grid">
         <div class="widget search-widget">
           <h3>🔍 Google Suche</h3>
-          <input
-            type="text"
-            placeholder="Suche..."
-            onkeypress="googleSearch(event)"
-          />
+          <input type="text" placeholder="Suche..." onkeypress="googleSearch(event)" />
         </div>
         <div class="widget">
           <h3>📧 Gmail</h3>
@@ -207,7 +227,7 @@
     </div>
   </div>
 
-  <!-- Twitter: Embed-Timeline (Twitter-Widget) -->
+  <!-- Twitter -->
   <div id="twitter-window" class="window">
     <div class="window-header">
       <div class="window-title">🐦 Twitter</div>
@@ -216,22 +236,26 @@
       </div>
     </div>
     <div class="window-content">
-      <a class="twitter-timeline"
-         data-width="100%"
-         data-height="100%"
-         href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">
-        Tweets von @TwitterDev
-      </a>
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      <p style="margin-top:10px;">Wenn die Timeline nicht angezeigt wird,<br>
-         <button class="open-button" onclick="openURL('https://twitter.com')">
-           Twitter in neuem Tab öffnen
-         </button>
-      </p>
+      <div class="app-links">
+        <a href="https://twitter.com" target="_blank" class="app-link">
+          <div class="app-link-icon">🐦</div>
+          <div class="app-link-info">
+            <h4>Twitter / X</h4>
+            <p>Öffne Twitter im Browser</p>
+          </div>
+        </a>
+        <a href="https://twitter.com/explore" target="_blank" class="app-link">
+          <div class="app-link-icon">🔥</div>
+          <div class="app-link-info">
+            <h4>Trending</h4>
+            <p>Entdecke was gerade angesagt ist</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- GitHub: Fallback auf Button -->
+  <!-- GitHub -->
   <div id="github-window" class="window">
     <div class="window-header">
       <div class="window-title">🐙 GitHub</div>
@@ -240,14 +264,33 @@
       </div>
     </div>
     <div class="window-content">
-      <p>GitHub in neuem Tab öffnen:</p>
-      <button class="open-button" onclick="openURL('https://github.com')">
-        GitHub öffnen
-      </button>
+      <div class="app-links">
+        <a href="https://github.com" target="_blank" class="app-link">
+          <div class="app-link-icon">🐙</div>
+          <div class="app-link-info">
+            <h4>GitHub</h4>
+            <p>Öffne GitHub im Browser</p>
+          </div>
+        </a>
+        <a href="https://github.com/explore" target="_blank" class="app-link">
+          <div class="app-link-icon">🔍</div>
+          <div class="app-link-info">
+            <h4>Explore</h4>
+            <p>Entdecke neue Repositories</p>
+          </div>
+        </a>
+        <a href="https://github.com/trending" target="_blank" class="app-link">
+          <div class="app-link-icon">📈</div>
+          <div class="app-link-info">
+            <h4>Trending</h4>
+            <p>Beliebte Projekte heute</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- StackOverflow: Fallback auf Button -->
+  <!-- StackOverflow -->
   <div id="stackoverflow-window" class="window">
     <div class="window-header">
       <div class="window-title">🧱 StackOverflow</div>
@@ -256,14 +299,33 @@
       </div>
     </div>
     <div class="window-content">
-      <p>StackOverflow in neuem Tab öffnen:</p>
-      <button class="open-button" onclick="openURL('https://stackoverflow.com')">
-        StackOverflow öffnen
-      </button>
+      <div class="app-links">
+        <a href="https://stackoverflow.com" target="_blank" class="app-link">
+          <div class="app-link-icon">🧱</div>
+          <div class="app-link-info">
+            <h4>StackOverflow</h4>
+            <p>Fragen und Antworten für Entwickler</p>
+          </div>
+        </a>
+        <a href="https://stackoverflow.com/questions" target="_blank" class="app-link">
+          <div class="app-link-icon">❓</div>
+          <div class="app-link-info">
+            <h4>Fragen</h4>
+            <p>Durchsuche alle Fragen</p>
+          </div>
+        </a>
+        <a href="https://stackoverflow.com/tags" target="_blank" class="app-link">
+          <div class="app-link-icon">🏷️</div>
+          <div class="app-link-info">
+            <h4>Tags</h4>
+            <p>Finde Fragen nach Technologie</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- Wikipedia: API-gestützter Embed -->
+  <!-- Wikipedia -->
   <div id="wikipedia-window" class="window">
     <div class="window-header">
       <div class="window-title">📚 Wikipedia</div>
