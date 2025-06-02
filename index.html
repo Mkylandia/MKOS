@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MKOS V2</title>
+  <title>MKOS V2 – Polished Edition</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -93,11 +93,12 @@
 
   <!-- App Windows -->
 
-  <!-- YouTube: Player + Direkt-Öffnen -->
+  <!-- YouTube: Player + Direkt-Öffnen + Fullscreen -->
   <div id="youtube-window" class="window">
     <div class="window-header">
       <div class="window-title">📺 YouTube</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('youtube')"></div>
         <div class="window-control close" onclick="closeApp('youtube')"></div>
       </div>
     </div>
@@ -105,7 +106,9 @@
       <div class="youtube-player">
         <input type="text" id="youtube-search" placeholder="YouTube-Suchbegriff eingeben..." />
         <button onclick="searchYouTube()">Suchen</button>
-        <button class="open-browser" onclick="openURL('https://www.youtube.com')">YouTube im Browser öffnen</button>
+        <button class="open-browser" onclick="openURL('https://www.youtube.com')">
+          YouTube im Browser öffnen
+        </button>
         <div class="video-container" id="video-container">
           <p>Ergebnisvideo erscheint hier.</p>
         </div>
@@ -118,6 +121,7 @@
     <div class="window-header">
       <div class="window-title">✈️ Telegram</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('telegram')"></div>
         <div class="window-control close" onclick="closeApp('telegram')"></div>
       </div>
     </div>
@@ -146,6 +150,7 @@
     <div class="window-header">
       <div class="window-title">📷 Instagram</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('instagram')"></div>
         <div class="window-control close" onclick="closeApp('instagram')"></div>
       </div>
     </div>
@@ -174,6 +179,7 @@
     <div class="window-header">
       <div class="window-title">🎮 CrazyGames</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('crazygames')"></div>
         <div class="window-control close" onclick="closeApp('crazygames')"></div>
       </div>
     </div>
@@ -187,6 +193,7 @@
     <div class="window-header">
       <div class="window-title">🎬 Films</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('films')"></div>
         <div class="window-control close" onclick="closeApp('films')"></div>
       </div>
     </div>
@@ -200,6 +207,7 @@
     <div class="window-header">
       <div class="window-title">🔍 Google Dashboard</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('google')"></div>
         <div class="window-control close" onclick="closeApp('google')"></div>
       </div>
     </div>
@@ -243,6 +251,7 @@
     <div class="window-header">
       <div class="window-title">🐦 Twitter</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('twitter')"></div>
         <div class="window-control close" onclick="closeApp('twitter')"></div>
       </div>
     </div>
@@ -271,6 +280,7 @@
     <div class="window-header">
       <div class="window-title">🐙 GitHub</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('github')"></div>
         <div class="window-control close" onclick="closeApp('github')"></div>
       </div>
     </div>
@@ -306,6 +316,7 @@
     <div class="window-header">
       <div class="window-title">🧱 StackOverflow</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('stackoverflow')"></div>
         <div class="window-control close" onclick="closeApp('stackoverflow')"></div>
       </div>
     </div>
@@ -336,16 +347,32 @@
     </div>
   </div>
 
-  <!-- Wikipedia -->
+  <!-- Wikipedia (analog zu Twitter) -->
   <div id="wikipedia-window" class="window">
     <div class="window-header">
       <div class="window-title">📚 Wikipedia</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('wikipedia')"></div>
         <div class="window-control close" onclick="closeApp('wikipedia')"></div>
       </div>
     </div>
     <div class="window-content">
-      <div id="wiki-content">Lade Artikel...</div>
+      <div class="app-links">
+        <a href="https://de.wikipedia.org" target="_blank" class="app-link">
+          <div class="app-link-icon">🌐</div>
+          <div class="app-link-info">
+            <h4>Wikipedia DE</h4>
+            <p>Hauptseite öffnen</p>
+          </div>
+        </a>
+        <a href="https://de.wikipedia.org/wiki/Spezial:Suche" target="_blank" class="app-link">
+          <div class="app-link-icon">🔍</div>
+          <div class="app-link-info">
+            <h4>Suche</h4>
+            <p>Artikel suchen</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -354,6 +381,7 @@
     <div class="window-header">
       <div class="window-title">🧮 Rechner</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('calculator')"></div>
         <div class="window-control close" onclick="closeApp('calculator')"></div>
       </div>
     </div>
@@ -388,6 +416,7 @@
     <div class="window-header">
       <div class="window-title">📝 Notizen</div>
       <div class="window-controls">
+        <div class="window-control maximize" onclick="toggleMaximize('notes')"></div>
         <div class="window-control close" onclick="closeApp('notes')"></div>
       </div>
     </div>
@@ -400,4 +429,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
