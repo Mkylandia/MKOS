@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MKOS V1</title>
+  <title>MKOS V2</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -50,9 +50,17 @@
         <div class="desktop-icon-image wikipedia">📚</div>
         <div class="desktop-icon-label">Wikipedia</div>
       </div>
+      <div class="desktop-icon" onclick="openApp('calculator')">
+        <div class="desktop-icon-image calculator">🧮</div>
+        <div class="desktop-icon-label">Rechner</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('notes')">
+        <div class="desktop-icon-image notes">📝</div>
+        <div class="desktop-icon-label">Notizen</div>
+      </div>
     </div>
 
-    <!-- Widgets auf dem Desktop -->
+    <!-- Widgets rechts oben -->
     <div class="desktop-widgets">
       <div class="widget time-widget floating">
         <h3 id="current-time">--:--</h3>
@@ -65,7 +73,7 @@
       </div>
     </div>
 
-    <!-- Taskbar -->
+    <!-- Taskbar am unteren Bildschirmrand -->
     <div class="taskbar">
       <div class="app-icon start-button" onclick="showStartMenu()">🏠</div>
       <div class="app-icon youtube" onclick="openApp('youtube')">📺</div>
@@ -78,12 +86,14 @@
       <div class="app-icon github" onclick="openApp('github')">🐙</div>
       <div class="app-icon stackoverflow" onclick="openApp('stackoverflow')">🧱</div>
       <div class="app-icon wikipedia" onclick="openApp('wikipedia')">📚</div>
+      <div class="app-icon calculator" onclick="openApp('calculator')">🧮</div>
+      <div class="app-icon notes" onclick="openApp('notes')">📝</div>
     </div>
   </div>
 
   <!-- App Windows -->
 
-  <!-- YouTube: Verbesserter Player -->
+  <!-- YouTube: Player + Direkt-Öffnen -->
   <div id="youtube-window" class="window">
     <div class="window-header">
       <div class="window-title">📺 YouTube</div>
@@ -93,10 +103,11 @@
     </div>
     <div class="window-content">
       <div class="youtube-player">
-        <input type="text" id="youtube-search" placeholder="Nach YouTube Videos suchen..." />
+        <input type="text" id="youtube-search" placeholder="YouTube-Suchbegriff eingeben..." />
         <button onclick="searchYouTube()">Suchen</button>
+        <button class="open-browser" onclick="openURL('https://www.youtube.com')">YouTube im Browser öffnen</button>
         <div class="video-container" id="video-container">
-          <p>Gib einen Suchbegriff ein, um YouTube Videos zu finden!</p>
+          <p>Ergebnisvideo erscheint hier.</p>
         </div>
       </div>
     </div>
@@ -116,14 +127,14 @@
           <div class="app-link-icon">🌐</div>
           <div class="app-link-info">
             <h4>Telegram Web</h4>
-            <p>Öffne Telegram im Browser</p>
+            <p>Browser-Version öffnen</p>
           </div>
         </a>
         <a href="https://desktop.telegram.org" target="_blank" class="app-link">
           <div class="app-link-icon">💻</div>
           <div class="app-link-info">
             <h4>Desktop App</h4>
-            <p>Lade die Telegram Desktop App herunter</p>
+            <p>Desktop-Version herunterladen</p>
           </div>
         </a>
       </div>
@@ -144,14 +155,14 @@
           <div class="app-link-icon">📱</div>
           <div class="app-link-info">
             <h4>Instagram Web</h4>
-            <p>Öffne Instagram im Browser</p>
+            <p>Browser-Version öffnen</p>
           </div>
         </a>
         <a href="https://www.instagram.com/explore/" target="_blank" class="app-link">
           <div class="app-link-icon">🔍</div>
           <div class="app-link-info">
             <h4>Entdecken</h4>
-            <p>Erkunde neue Inhalte</p>
+            <p>Neue Inhalte anzeigen</p>
           </div>
         </a>
       </div>
@@ -338,6 +349,55 @@
     </div>
   </div>
 
+  <!-- Rechner (Calculator) -->
+  <div id="calculator-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🧮 Rechner</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('calculator')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="calculator">
+        <input type="text" id="calc-display" readonly />
+        <div class="calc-buttons">
+          <button onclick="appendCalc('7')">7</button>
+          <button onclick="appendCalc('8')">8</button>
+          <button onclick="appendCalc('9')">9</button>
+          <button onclick="appendCalc('/')">÷</button>
+          <button onclick="appendCalc('4')">4</button>
+          <button onclick="appendCalc('5')">5</button>
+          <button onclick="appendCalc('6')">6</button>
+          <button onclick="appendCalc('*')">×</button>
+          <button onclick="appendCalc('1')">1</button>
+          <button onclick="appendCalc('2')">2</button>
+          <button onclick="appendCalc('3')">3</button>
+          <button onclick="appendCalc('-')">−</button>
+          <button onclick="appendCalc('0')">0</button>
+          <button onclick="appendCalc('.')">.</button>
+          <button onclick="calculateResult()">=</button>
+          <button onclick="appendCalc('+')">+</button>
+          <button onclick="clearCalc()">C</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notizen (Notes) -->
+  <div id="notes-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📝 Notizen</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('notes')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <textarea id="notes-area" placeholder="Hier deine Notizen eingeben..."></textarea>
+      <button class="open-button" onclick="downloadNotes()">Notizen herunterladen</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
+
