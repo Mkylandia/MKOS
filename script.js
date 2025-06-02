@@ -1,5 +1,6 @@
 // Zähler, um die Z-Index-Werte nach Bedarf zu erhöhen
 let windowZIndex = 1000;
+const originalSizes = {}; // speichert ursprüngliche Größe/Position für Maximieren
 
 /**
  * Öffnet das entsprechende Fenster (<appName>-window) mittig im Viewport.
@@ -9,13 +10,12 @@ function openApp(appName) {
   const appWindow = document.getElementById(`${appName}-window`);
   if (!appWindow) return;
 
-  // Sichtbar machen und in den Vordergrund holen
   appWindow.classList.remove('hide');
   appWindow.classList.add('show');
   appWindow.style.display = 'block';
   appWindow.style.zIndex = ++windowZIndex;
 
-  // Größere Standardfenster für bessere Usability
+  // Standardgröße
   const width = Math.min(800, window.innerWidth - 100);
   const height = Math.min(600, window.innerHeight - 100);
 
@@ -27,6 +27,8 @@ function openApp(appName) {
   appWindow.style.width  = `${width}px`;
   appWindow.style.height = `${height}px`;
 
+  // Stelle sicher, dass maximize zurückgesetzt ist
+  appWindow.dataset.maximized = "false";
   makeDraggable(appWindow);
 }
 
@@ -69,6 +71,7 @@ function makeDraggable(element) {
   header.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
+    if (element.dataset.maximized === "true") return; // nicht draggable, wenn maximiert
     e.preventDefault();
     mouseX = e.clientX;
     mouseY = e.clientY;
@@ -100,7 +103,7 @@ function googleSearch(event) {
   if (event.key === 'Enter') {
     const query = event.target.value.trim();
     if (query) {
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+      openURL(`https://www.google.com/search?q=${encodeURIComponent(query)}`);
       event.target.value = '';
     }
   }
@@ -114,24 +117,8 @@ function showStartMenu() {
 }
 
 /**
- * Lädt den Wikipedia-Artikel „Deutschland“ per API ins Fenster.
- */
-function loadWikipediaArticle() {
-  const endpoint = "https://de.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=Deutschland&format=json&origin=*";
-  fetch(endpoint)
-    .then(res => res.json())
-    .then(data => {
-      const page = Object.values(data.query.pages)[0];
-      document.getElementById("wiki-content").innerHTML = page.extract;
-    })
-    .catch(() => {
-      document.getElementById("wiki-content").textContent = "Fehler beim Laden des Artikels.";
-    });
-}
-
-/**
- * Sucht auf YouTube nach einer gegebenen Video-ID oder öffnet direkt ein Video.
- * Wenn Eingabe keine valide ID ist, öffnet YouTube-Hauptseite.
+ * Sucht auf YouTube nach einer Video-ID oder öffnet die Hauptseite.
+ * Validiert 11-stellige IDs, sonst öffnet YouTube-Suchergebnisse.
  */
 function searchYouTube() {
   const query = document.getElementById("youtube-search").value.trim();
@@ -139,13 +126,13 @@ function searchYouTube() {
     openURL('https://www.youtube.com');
     return;
   }
-  // Wenn es aussieht wie Video-ID (z.B. 11 Zeichen alphanumerisch), direkt einbetten
+  // Wenn es aussieht wie Video-ID (11 alphanumerische Zeichen), direkt einbetten
   if (/^[A-Za-z0-9_-]{11}$/.test(query)) {
     const embedUrl = `https://www.youtube.com/embed/${query}`;
     document.getElementById("video-container").innerHTML =
       `<iframe src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
   } else {
-    // Ansonsten YouTube-Suche öffnen
+    // Ansonsten YouTube-Suchergebnisse öffnen
     openURL(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`);
   }
 }
@@ -186,12 +173,44 @@ function downloadNotes() {
   URL.revokeObjectURL(url);
 }
 
+/**
+ * Maximiert ein Fenster auf fast Vollbild und merkt sich Originalgröße/Position.
+ * Zweiter Aufruf stellt zurück.
+ */
+function toggleMaximize(appName) {
+  const appWindow = document.getElementById(`${appName}-window`);
+  if (!appWindow) return;
+
+  if (appWindow.dataset.maximized === "true") {
+    // Wiederherstellen
+    const original = JSON.parse(originalSizes[appName]);
+    appWindow.style.left = original.left;
+    appWindow.style.top = original.top;
+    appWindow.style.width = original.width;
+    appWindow.style.height = original.height;
+    appWindow.dataset.maximized = "false";
+    appWindow.style.borderRadius = "12px";
+  } else {
+    // Speichere aktuelle Größe/Position
+    originalSizes[appName] = JSON.stringify({
+      left: appWindow.style.left,
+      top: appWindow.style.top,
+      width: appWindow.style.width,
+      height: appWindow.style.height
+    });
+    // Vollbild (fast)
+    appWindow.style.left = "5vw";
+    appWindow.style.top = "5vh";
+    appWindow.style.width = "90vw";
+    appWindow.style.height = "90vh";
+    appWindow.dataset.maximized = "true";
+    appWindow.style.borderRadius = "6px";
+  }
+}
+
 // Initialisierung: Uhrzeit-Update alle Sekunde
 updateTime();
 setInterval(updateTime, 1000);
-
-// Wikipedia-Artikel sofort laden, damit beim Öffnen schon Inhalt steht
-loadWikipediaArticle();
 
 /**
  * Aktualisiert die aktuelle Uhrzeit und das Datum im Widget.
@@ -214,7 +233,6 @@ function updateTime() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Falls Fenster voreingestellt sichtbar sein sollten
   document.querySelectorAll('.window').forEach(win => {
     makeDraggable(win);
   });
