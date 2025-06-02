@@ -117,6 +117,22 @@ function showStartMenu() {
 }
 
 /**
+ * Lädt den Wikipedia-Artikel „Deutschland“ per API ins Fenster.
+ */
+function loadWikipediaArticle() {
+  const endpoint = "https://de.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=Deutschland&format=json&origin=*";
+  fetch(endpoint)
+    .then(res => res.json())
+    .then(data => {
+      const page = Object.values(data.query.pages)[0];
+      document.getElementById("wiki-content").innerHTML = page.extract;
+    })
+    .catch(() => {
+      document.getElementById("wiki-content").textContent = "Fehler beim Laden des Artikels.";
+    });
+}
+
+/**
  * Sucht auf YouTube nach einer Video-ID oder öffnet die Hauptseite.
  * Validiert 11-stellige IDs, sonst öffnet YouTube-Suchergebnisse.
  */
@@ -211,6 +227,9 @@ function toggleMaximize(appName) {
 // Initialisierung: Uhrzeit-Update alle Sekunde
 updateTime();
 setInterval(updateTime, 1000);
+
+// Wikipedia-Artikel sofort laden, damit beim Öffnen schon Inhalt steht
+loadWikipediaArticle();
 
 /**
  * Aktualisiert die aktuelle Uhrzeit und das Datum im Widget.
