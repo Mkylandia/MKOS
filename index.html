@@ -1,257 +1,276 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MKOS V1</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MKOS V1</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="desktop">
-        <!-- Desktop Icons -->
-        <div class="floating-icons">
-            <div class="desktop-icon" onclick="openApp('youtube')">
-                <div class="desktop-icon-image youtube">📺</div>
-                <div class="desktop-icon-label">YouTube</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('telegram')">
-                <div class="desktop-icon-image telegram">✈️</div>
-                <div class="desktop-icon-label">Telegram</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('instagram')">
-                <div class="desktop-icon-image instagram">📷</div>
-                <div class="desktop-icon-label">Instagram</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('crazygames')">
-                <div class="desktop-icon-image crazygames">🎮</div>
-                <div class="desktop-icon-label">CrazyGames</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('films')">
-                <div class="desktop-icon-image films">🎬</div>
-                <div class="desktop-icon-label">Films</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('google')">
-                <div class="desktop-icon-image google">🔍</div>
-                <div class="desktop-icon-label">Google</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('twitter')">
-                <div class="desktop-icon-image twitter">🐦</div>
-                <div class="desktop-icon-label">Twitter</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('github')">
-                <div class="desktop-icon-image github">🐙</div>
-                <div class="desktop-icon-label">GitHub</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('stackoverflow')">
-                <div class="desktop-icon-image stackoverflow">🧱</div>
-                <div class="desktop-icon-label">StackOverflow</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('wikipedia')">
-                <div class="desktop-icon-image wikipedia">📚</div>
-                <div class="desktop-icon-label">Wikipedia</div>
-            </div>
-        </div>
-
-        <!-- Widgets auf dem Desktop -->
-        <div class="desktop-widgets">
-            <div class="widget time-widget floating">
-                <h3 id="current-time">--:--</h3>
-                <p id="current-date">--, -- -- ----</p>
-            </div>
-            <div class="widget weather-widget">
-                <h3>🌤️ Wetter</h3>
-                <p class="weather-temp">22 °C – Teilweise bewölkt</p>
-                <p class="weather-location">Heidenheim, Deutschland</p>
-            </div>
-        </div>
-
-        <!-- Taskbar -->
-        <div class="taskbar">
-            <div class="app-icon start-button" onclick="showStartMenu()">🏠</div>
-            <div class="app-icon youtube" onclick="openApp('youtube')">📺</div>
-            <div class="app-icon telegram" onclick="openApp('telegram')">✈️</div>
-            <div class="app-icon instagram" onclick="openApp('instagram')">📷</div>
-            <div class="app-icon crazygames" onclick="openApp('crazygames')">🎮</div>
-            <div class="app-icon films" onclick="openApp('films')">🎬</div>
-            <div class="app-icon google" onclick="openApp('google')">🔍</div>
-            <div class="app-icon twitter" onclick="openApp('twitter')">🐦</div>
-            <div class="app-icon github" onclick="openApp('github')">🐙</div>
-            <div class="app-icon stackoverflow" onclick="openApp('stackoverflow')">🧱</div>
-            <div class="app-icon wikipedia" onclick="openApp('wikipedia')">📚</div>
-        </div>
+  <div class="desktop">
+    <!-- Desktop Icons -->
+    <div class="floating-icons">
+      <div class="desktop-icon" onclick="openApp('youtube')">
+        <div class="desktop-icon-image youtube">📺</div>
+        <div class="desktop-icon-label">YouTube</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('telegram')">
+        <div class="desktop-icon-image telegram">✈️</div>
+        <div class="desktop-icon-label">Telegram</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('instagram')">
+        <div class="desktop-icon-image instagram">📷</div>
+        <div class="desktop-icon-label">Instagram</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('crazygames')">
+        <div class="desktop-icon-image crazygames">🎮</div>
+        <div class="desktop-icon-label">CrazyGames</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('films')">
+        <div class="desktop-icon-image films">🎬</div>
+        <div class="desktop-icon-label">Films</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('google')">
+        <div class="desktop-icon-image google">🔍</div>
+        <div class="desktop-icon-label">Google</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('twitter')">
+        <div class="desktop-icon-image twitter">🐦</div>
+        <div class="desktop-icon-label">Twitter</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('github')">
+        <div class="desktop-icon-image github">🐙</div>
+        <div class="desktop-icon-label">GitHub</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('stackoverflow')">
+        <div class="desktop-icon-image stackoverflow">🧱</div>
+        <div class="desktop-icon-label">StackOverflow</div>
+      </div>
+      <div class="desktop-icon" onclick="openApp('wikipedia')">
+        <div class="desktop-icon-image wikipedia">📚</div>
+        <div class="desktop-icon-label">Wikipedia</div>
+      </div>
     </div>
 
-    <!-- App Windows -->
-    <div id="youtube-window" class="window">
-        <div class="window-header">
-            <div class="window-title">📺 YouTube</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('youtube')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://www.youtube.com"></iframe>
-        </div>
+    <!-- Widgets auf dem Desktop -->
+    <div class="desktop-widgets">
+      <div class="widget time-widget floating">
+        <h3 id="current-time">--:--</h3>
+        <p id="current-date">--, -- -- ----</p>
+      </div>
+      <div class="widget weather-widget">
+        <h3>🌤️ Wetter</h3>
+        <p class="weather-temp">22 °C – Teilweise bewölkt</p>
+        <p class="weather-location">Heidenheim, Deutschland</p>
+      </div>
     </div>
 
-    <div id="telegram-window" class="window">
-        <div class="window-header">
-            <div class="window-title">✈️ Telegram Web</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('telegram')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://web.telegram.org"></iframe>
-        </div>
+    <!-- Taskbar -->
+    <div class="taskbar">
+      <div class="app-icon start-button" onclick="showStartMenu()">🏠</div>
+      <div class="app-icon youtube" onclick="openApp('youtube')">📺</div>
+      <div class="app-icon telegram" onclick="openApp('telegram')">✈️</div>
+      <div class="app-icon instagram" onclick="openApp('instagram')">📷</div>
+      <div class="app-icon crazygames" onclick="openApp('crazygames')">🎮</div>
+      <div class="app-icon films" onclick="openApp('films')">🎬</div>
+      <div class="app-icon google" onclick="openApp('google')">🔍</div>
+      <div class="app-icon twitter" onclick="openApp('twitter')">🐦</div>
+      <div class="app-icon github" onclick="openApp('github')">🐙</div>
+      <div class="app-icon stackoverflow" onclick="openApp('stackoverflow')">🧱</div>
+      <div class="app-icon wikipedia" onclick="openApp('wikipedia')">📚</div>
     </div>
+  </div>
 
-    <div id="instagram-window" class="window">
-        <div class="window-header">
-            <div class="window-title">📷 Instagram</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('instagram')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://www.instagram.com"></iframe>
-        </div>
+  <!-- App Windows -->
+  <!-- YouTube -->
+  <div id="youtube-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📺 YouTube</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('youtube')"></div>
+      </div>
     </div>
-
-    <div id="crazygames-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🎮 CrazyGames</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('crazygames')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://www.crazygames.com"></iframe>
-        </div>
+    <div class="window-content">
+      <p>Einbetten der YouTube-Hauptseite ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://www.youtube.com')">
+        In neuem Tab öffnen
+      </button>
     </div>
+  </div>
 
-    <div id="films-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🎬 Films</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('films')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://mkylandia.github.io/Films/"></iframe>
-        </div>
+  <!-- Telegram -->
+  <div id="telegram-window" class="window">
+    <div class="window-header">
+      <div class="window-title">✈️ Telegram Web</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('telegram')"></div>
+      </div>
     </div>
-
-    <div id="google-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🔍 Google Dashboard</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('google')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <div class="widget-grid">
-                <div class="widget search-widget">
-                    <h3>🔍 Google Suche</h3>
-                    <input type="text" placeholder="Suche..." onkeypress="googleSearch(event)">
-                </div>
-                <div class="widget">
-                    <h3>📧 Gmail</h3>
-                    <p>Schnellzugriff auf deine E-Mails</p>
-                    <button onclick="window.open('https://gmail.com', '_blank')">Öffnen</button>
-                </div>
-                <div class="widget">
-                    <h3>📅 Kalender</h3>
-                    <p>Deine Termine im Überblick</p>
-                    <button onclick="window.open('https://calendar.google.com', '_blank')">Öffnen</button>
-                </div>
-                <div class="widget">
-                    <h3>💾 Drive</h3>
-                    <p>Deine Dateien in der Cloud</p>
-                    <button onclick="window.open('https://drive.google.com', '_blank')">Öffnen</button>
-                </div>
-                <div class="widget">
-                    <h3>🗺️ Maps</h3>
-                    <p>Navigation und Karten</p>
-                    <button onclick="window.open('https://maps.google.com', '_blank')">Öffnen</button>
-                </div>
-                <div class="widget">
-                    <h3>📺 YouTube</h3>
-                    <p>Videos und Musik</p>
-                    <button onclick="window.open('https://youtube.com', '_blank')">Öffnen</button>
-                </div>
-            </div>
-        </div>
+    <div class="window-content">
+      <p>Einbetten von Telegram ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://web.telegram.org')">
+        In neuem Tab öffnen
+      </button>
     </div>
+  </div>
 
-    <div id="twitter-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🐦 Twitter</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('twitter')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://twitter.com"></iframe>
-        </div>
+  <!-- Instagram -->
+  <div id="instagram-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📷 Instagram</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('instagram')"></div>
+      </div>
     </div>
-
-    <div id="github-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🐙 GitHub</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('github')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://github.com"></iframe>
-        </div>
+    <div class="window-content">
+      <p>Einbetten von Instagram ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://www.instagram.com')">
+        In neuem Tab öffnen
+      </button>
     </div>
+  </div>
 
-    <div id="stackoverflow-window" class="window">
-        <div class="window-header">
-            <div class="window-title">🧱 StackOverflow</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('stackoverflow')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://stackoverflow.com"></iframe>
-        </div>
+  <!-- CrazyGames -->
+  <div id="crazygames-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🎮 CrazyGames</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('crazygames')"></div>
+      </div>
     </div>
-
-    <div id="wikipedia-window" class="window">
-        <div class="window-header">
-            <div class="window-title">📚 Wikipedia</div>
-            <div class="window-controls">
-                <div class="window-control minimize"></div>
-                <div class="window-control maximize"></div>
-                <div class="window-control close" onclick="closeApp('wikipedia')"></div>
-            </div>
-        </div>
-        <div class="window-content">
-            <iframe src="https://de.wikipedia.org"></iframe>
-        </div>
+    <div class="window-content">
+      <p>Einbetten von CrazyGames ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://www.crazygames.com')">
+        In neuem Tab öffnen
+      </button>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Films -->
+  <div id="films-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🎬 Films</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('films')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <p>Einbetten der Films-Seite ist möglich.</p>
+      <iframe src="https://mkylandia.github.io/Films/"></iframe>
+    </div>
+  </div>
+
+  <!-- Google Dashboard -->
+  <div id="google-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🔍 Google Dashboard</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('google')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="widget-grid">
+        <div class="widget search-widget">
+          <h3>🔍 Google Suche</h3>
+          <input
+            type="text"
+            placeholder="Suche..."
+            onkeypress="googleSearch(event)"
+          />
+        </div>
+        <div class="widget">
+          <h3>📧 Gmail</h3>
+          <p>Schnellzugriff auf deine E-Mails</p>
+          <button onclick="openURL('https://gmail.com')">Öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>📅 Kalender</h3>
+          <p>Deine Termine im Überblick</p>
+          <button onclick="openURL('https://calendar.google.com')">Öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>💾 Drive</h3>
+          <p>Deine Dateien in der Cloud</p>
+          <button onclick="openURL('https://drive.google.com')">Öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>🗺️ Maps</h3>
+          <p>Navigation und Karten</p>
+          <button onclick="openURL('https://maps.google.com')">Öffnen</button>
+        </div>
+        <div class="widget">
+          <h3>📺 YouTube</h3>
+          <p>Videos und Musik</p>
+          <button onclick="openURL('https://youtube.com')">Öffnen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Twitter -->
+  <div id="twitter-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🐦 Twitter</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('twitter')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <p>Einbetten von Twitter ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://twitter.com')">
+        In neuem Tab öffnen
+      </button>
+    </div>
+  </div>
+
+  <!-- GitHub -->
+  <div id="github-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🐙 GitHub</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('github')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <p>Einbetten von GitHub ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://github.com')">
+        In neuem Tab öffnen
+      </button>
+    </div>
+  </div>
+
+  <!-- StackOverflow -->
+  <div id="stackoverflow-window" class="window">
+    <div class="window-header">
+      <div class="window-title">🧱 StackOverflow</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('stackoverflow')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <p>Einbetten von StackOverflow ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://stackoverflow.com')">
+        In neuem Tab öffnen
+      </button>
+    </div>
+  </div>
+
+  <!-- Wikipedia -->
+  <div id="wikipedia-window" class="window">
+    <div class="window-header">
+      <div class="window-title">📚 Wikipedia</div>
+      <div class="window-controls">
+        <div class="window-control close" onclick="closeApp('wikipedia')"></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <p>Einbetten von Wikipedia ist blockiert.</p>
+      <button class="open-button" onclick="openURL('https://de.wikipedia.org')">
+        In neuem Tab öffnen
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
