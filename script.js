@@ -15,7 +15,7 @@ function openApp(appName) {
   appWindow.style.display = 'block';
   appWindow.style.zIndex = ++windowZIndex;
 
-  // Zentriere das Fenster (min. 400×200)
+  // Zentriere das Fenster (500×300)
   const leftPos = (window.innerWidth - 500) / 2;
   const topPos = (window.innerHeight - 300) / 2;
   appWindow.style.left = `${Math.max(leftPos, 20)}px`;
@@ -109,9 +109,28 @@ function showStartMenu() {
   alert("MKOS V1 – Willkommen im modernen Desktop-Erlebnis! 🚀");
 }
 
-/* Initialisierung: Uhrzeit-Update alle Sekunde */
+/**
+ * Aktuell: Lädt den Wikipedia-Artikel „Deutschland“ per API ins Fenster.
+ */
+function loadWikipediaArticle() {
+  const endpoint = "https://de.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=Deutschland&format=json&origin=*";
+  fetch(endpoint)
+    .then(res => res.json())
+    .then(data => {
+      const page = Object.values(data.query.pages)[0];
+      document.getElementById("wiki-content").innerHTML = page.extract;
+    })
+    .catch(() => {
+      document.getElementById("wiki-content").textContent = "Fehler beim Laden des Artikels.";
+    });
+}
+
+// Initialisierung: Uhrzeit-Update alle Sekunde
 updateTime();
 setInterval(updateTime, 1000);
+
+// Wikipedia-Artikel sofort laden, damit beim Öffnen schon Inhalt steht
+loadWikipediaArticle();
 
 /**
  * Aktualisiert die aktuelle Uhrzeit und das Datum im Widget.
