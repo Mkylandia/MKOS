@@ -173,7 +173,7 @@ body {
 .wikipedia      { background: linear-gradient(135deg, #000000, #666666); }
 .start-button   { background: linear-gradient(135deg, #667eea, #764ba2); border: 2px solid rgba(255, 255, 255, 0.2); }
 
-/* Fenster (modale Fenster) */
+/* Fenster (modale Fenster) - WICHTIG: Resize aktiviert */
 .window {
   position: absolute;
   display: none;
@@ -183,9 +183,11 @@ body {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   min-width: 400px;
-  min-height: 200px;
-  resize: both;
-  overflow: hidden;
+  min-height: 300px;
+  max-width: 90vw;
+  max-height: 90vh;
+  resize: both; /* Das macht Fenster resizable */
+  overflow: auto; /* Wichtig für resizing */
   transition: opacity 0.3s ease;
 }
 
@@ -208,6 +210,7 @@ body {
   align-items: center;
   cursor: move;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px 15px 0 0;
 }
 
 .window-title {
@@ -240,14 +243,13 @@ body {
 .window-content {
   padding: 0;
   height: calc(100% - 44px);
-  overflow: hidden;
+  overflow: auto;
 }
 
 .window-content iframe {
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 8px;
 }
 
 .window-content p {
@@ -258,30 +260,34 @@ body {
 
 .open-button {
   margin: 0 20px 20px;
-  padding: 8px 16px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   background: #4285f4;
   color: white;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .open-button:hover {
   background: #396de3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
 }
 
 /* Google-Widgets innerhalb des Google-Fensters */
 .widget-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
 .search-widget input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 12px 16px;
   border: none;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.2);
@@ -301,15 +307,115 @@ body {
 
 .widget button {
   margin-top: 10px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   background: #4285f4;
   color: white;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 13px;
+  transition: all 0.3s ease;
 }
 
 .widget button:hover {
   background: #396de3;
+  transform: translateY(-1px);
+}
+
+/* Spezielle Stile für App-Inhalte */
+.youtube-player {
+  padding: 20px;
+  text-align: center;
+}
+
+.youtube-player input {
+  width: 70%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.youtube-player button {
+  padding: 12px 20px;
+  background: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.youtube-player button:hover {
+  background: #cc0000;
+}
+
+.video-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.video-container iframe {
+  max-width: 100%;
+  height: 300px;
+  border-radius: 8px;
+}
+
+.app-links {
+  padding: 20px;
+  display: grid;
+  gap: 15px;
+}
+
+.app-link {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.app-link:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.app-link-icon {
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.app-link-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.app-link-info p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.7;
+  padding: 0;
+}
+
+#wiki-content {
+  padding: 20px;
+  line-height: 1.6;
+  color: #333;
+}
+
+#wiki-content h1,
+#wiki-content h2,
+#wiki-content h3 {
+  margin: 20px 0 10px 0;
+  color: #2c3e50;
+}
+
+#wiki-content p {
+  margin-bottom: 15px;
+  padding: 0;
 }
