@@ -18,7 +18,7 @@ function openApp(appName) {
   // Größere Standardfenster für bessere Usability
   const width = Math.min(800, window.innerWidth - 100);
   const height = Math.min(600, window.innerHeight - 100);
-      
+
   // Zentriere das Fenster
   const leftPos = (window.innerWidth - width) / 2;
   const topPos = (window.innerHeight - height) / 2;
@@ -110,7 +110,7 @@ function googleSearch(event) {
  * Zeigt eine Willkommensnachricht, wenn der Start-Button geklickt wird.
  */
 function showStartMenu() {
-  alert("MKOS V1 – Willkommen im modernen Desktop-Erlebnis! 🚀");
+  alert("MKOS V2 – Willkommen im erweiterten Desktop-Erlebnis! 🚀");
 }
 
 /**
@@ -130,15 +130,60 @@ function loadWikipediaArticle() {
 }
 
 /**
- * Sucht auf YouTube nach einem eingegebenen Begriff und zeigt das erste Video.
+ * Sucht auf YouTube nach einer gegebenen Video-ID oder öffnet direkt ein Video.
+ * Wenn Eingabe keine valide ID ist, öffnet YouTube-Hauptseite.
  */
 function searchYouTube() {
   const query = document.getElementById("youtube-search").value.trim();
-  if (!query) return;
-  // YouTube Data API v3 ist nötig, hier nur beispielhaft ein Embed-Link
-  const videoId = encodeURIComponent(query); 
-  const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-  document.getElementById("video-container").innerHTML = `<iframe src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  if (!query) {
+    openURL('https://www.youtube.com');
+    return;
+  }
+  // Wenn es aussieht wie Video-ID (z.B. 11 Zeichen alphanumerisch), direkt einbetten
+  if (/^[A-Za-z0-9_-]{11}$/.test(query)) {
+    const embedUrl = `https://www.youtube.com/embed/${query}`;
+    document.getElementById("video-container").innerHTML =
+      `<iframe src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  } else {
+    // Ansonsten YouTube-Suche öffnen
+    openURL(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`);
+  }
+}
+
+/**
+ * Rechnerfunktionen: Zeichen anhängen, Ergebnis berechnen, löschen.
+ */
+function appendCalc(value) {
+  const display = document.getElementById("calc-display");
+  display.value += value;
+}
+
+function calculateResult() {
+  const display = document.getElementById("calc-display");
+  try {
+    // eslint-disable-next-line no-eval
+    display.value = eval(display.value) ?? "";
+  } catch {
+    display.value = "Fehler";
+  }
+}
+
+function clearCalc() {
+  document.getElementById("calc-display").value = "";
+}
+
+/**
+ * Notizen herunterladen als Textdatei.
+ */
+function downloadNotes() {
+  const content = document.getElementById("notes-area").value;
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "notizen.txt";
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 // Initialisierung: Uhrzeit-Update alle Sekunde
