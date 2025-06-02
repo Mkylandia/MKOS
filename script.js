@@ -15,13 +15,17 @@ function openApp(appName) {
   appWindow.style.display = 'block';
   appWindow.style.zIndex = ++windowZIndex;
 
-  // Zentriere das Fenster (500×300)
-  const leftPos = (window.innerWidth - 500) / 2;
-  const topPos = (window.innerHeight - 300) / 2;
+  // Größere Standardfenster für bessere Usability
+  const width = Math.min(800, window.innerWidth - 100);
+  const height = Math.min(600, window.innerHeight - 100);
+      
+  // Zentriere das Fenster
+  const leftPos = (window.innerWidth - width) / 2;
+  const topPos = (window.innerHeight - height) / 2;
   appWindow.style.left = `${Math.max(leftPos, 20)}px`;
   appWindow.style.top  = `${Math.max(topPos, 20)}px`;
-  appWindow.style.width  = '500px';
-  appWindow.style.height = '300px';
+  appWindow.style.width  = `${width}px`;
+  appWindow.style.height = `${height}px`;
 
   makeDraggable(appWindow);
 }
@@ -110,7 +114,7 @@ function showStartMenu() {
 }
 
 /**
- * Aktuell: Lädt den Wikipedia-Artikel „Deutschland“ per API ins Fenster.
+ * Lädt den Wikipedia-Artikel „Deutschland“ per API ins Fenster.
  */
 function loadWikipediaArticle() {
   const endpoint = "https://de.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=Deutschland&format=json&origin=*";
@@ -123,6 +127,18 @@ function loadWikipediaArticle() {
     .catch(() => {
       document.getElementById("wiki-content").textContent = "Fehler beim Laden des Artikels.";
     });
+}
+
+/**
+ * Sucht auf YouTube nach einem eingegebenen Begriff und zeigt das erste Video.
+ */
+function searchYouTube() {
+  const query = document.getElementById("youtube-search").value.trim();
+  if (!query) return;
+  // YouTube Data API v3 ist nötig, hier nur beispielhaft ein Embed-Link
+  const videoId = encodeURIComponent(query); 
+  const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  document.getElementById("video-container").innerHTML = `<iframe src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
 }
 
 // Initialisierung: Uhrzeit-Update alle Sekunde
