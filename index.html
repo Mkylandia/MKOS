@@ -82,7 +82,8 @@
   </div>
 
   <!-- App Windows -->
-  <!-- YouTube -->
+
+  <!-- YouTube: Embed eines Beispielvideos -->
   <div id="youtube-window" class="window">
     <div class="window-header">
       <div class="window-title">📺 YouTube</div>
@@ -91,14 +92,17 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten der YouTube-Hauptseite ist blockiert.</p>
-      <button class="open-button" onclick="openURL('https://www.youtube.com')">
-        In neuem Tab öffnen
-      </button>
+      <iframe
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 
-  <!-- Telegram -->
+  <!-- Telegram: Fallback auf neuen Tab -->
   <div id="telegram-window" class="window">
     <div class="window-header">
       <div class="window-title">✈️ Telegram Web</div>
@@ -107,14 +111,14 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von Telegram ist blockiert.</p>
+      <p>Telegram in einem neuen Tab öffnen:</p>
       <button class="open-button" onclick="openURL('https://web.telegram.org')">
-        In neuem Tab öffnen
+        Telegram Web öffnen
       </button>
     </div>
   </div>
 
-  <!-- Instagram -->
+  <!-- Instagram: Embed eines Beispiel-Posts -->
   <div id="instagram-window" class="window">
     <div class="window-header">
       <div class="window-title">📷 Instagram</div>
@@ -123,14 +127,14 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von Instagram ist blockiert.</p>
-      <button class="open-button" onclick="openURL('https://www.instagram.com')">
-        In neuem Tab öffnen
-      </button>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Be8R_4gJcSz/" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0 auto; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+      </blockquote>
+      <script async defer src="https://www.instagram.com/embed.js"></script>
+      <p style="margin-top:10px;">Falls nicht angezeigt, <button class="open-button" onclick="openURL('https://www.instagram.com')">Instagram in neuem Tab öffnen</button>.</p>
     </div>
   </div>
 
-  <!-- CrazyGames -->
+  <!-- CrazyGames: Embed erlaubt -->
   <div id="crazygames-window" class="window">
     <div class="window-header">
       <div class="window-title">🎮 CrazyGames</div>
@@ -139,14 +143,11 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von CrazyGames ist blockiert.</p>
-      <button class="open-button" onclick="openURL('https://www.crazygames.com')">
-        In neuem Tab öffnen
-      </button>
+      <iframe src="https://www.crazygames.com" title="CrazyGames"></iframe>
     </div>
   </div>
 
-  <!-- Films -->
+  <!-- Films: Embed erlaubt -->
   <div id="films-window" class="window">
     <div class="window-header">
       <div class="window-title">🎬 Films</div>
@@ -155,12 +156,11 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten der Films-Seite ist möglich.</p>
-      <iframe src="https://mkylandia.github.io/Films/"></iframe>
+      <iframe src="https://mkylandia.github.io/Films/" title="Films"></iframe>
     </div>
   </div>
 
-  <!-- Google Dashboard -->
+  <!-- Google Dashboard: Widgets & Suche -->
   <div id="google-window" class="window">
     <div class="window-header">
       <div class="window-title">🔍 Google Dashboard</div>
@@ -181,33 +181,33 @@
         <div class="widget">
           <h3>📧 Gmail</h3>
           <p>Schnellzugriff auf deine E-Mails</p>
-          <button onclick="openURL('https://gmail.com')">Öffnen</button>
+          <button onclick="openURL('https://mail.google.com')">Gmail öffnen</button>
         </div>
         <div class="widget">
           <h3>📅 Kalender</h3>
           <p>Deine Termine im Überblick</p>
-          <button onclick="openURL('https://calendar.google.com')">Öffnen</button>
+          <button onclick="openURL('https://calendar.google.com')">Kalender öffnen</button>
         </div>
         <div class="widget">
           <h3>💾 Drive</h3>
           <p>Deine Dateien in der Cloud</p>
-          <button onclick="openURL('https://drive.google.com')">Öffnen</button>
+          <button onclick="openURL('https://drive.google.com')">Drive öffnen</button>
         </div>
         <div class="widget">
           <h3>🗺️ Maps</h3>
           <p>Navigation und Karten</p>
-          <button onclick="openURL('https://maps.google.com')">Öffnen</button>
+          <button onclick="openURL('https://maps.google.com')">Maps öffnen</button>
         </div>
         <div class="widget">
           <h3>📺 YouTube</h3>
           <p>Videos und Musik</p>
-          <button onclick="openURL('https://youtube.com')">Öffnen</button>
+          <button onclick="openURL('https://www.youtube.com')">YouTube öffnen</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Twitter -->
+  <!-- Twitter: Embed-Timeline (Twitter-Widget) -->
   <div id="twitter-window" class="window">
     <div class="window-header">
       <div class="window-title">🐦 Twitter</div>
@@ -216,14 +216,22 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von Twitter ist blockiert.</p>
-      <button class="open-button" onclick="openURL('https://twitter.com')">
-        In neuem Tab öffnen
-      </button>
+      <a class="twitter-timeline"
+         data-width="100%"
+         data-height="100%"
+         href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">
+        Tweets von @TwitterDev
+      </a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <p style="margin-top:10px;">Wenn die Timeline nicht angezeigt wird,<br>
+         <button class="open-button" onclick="openURL('https://twitter.com')">
+           Twitter in neuem Tab öffnen
+         </button>
+      </p>
     </div>
   </div>
 
-  <!-- GitHub -->
+  <!-- GitHub: Fallback auf Button -->
   <div id="github-window" class="window">
     <div class="window-header">
       <div class="window-title">🐙 GitHub</div>
@@ -232,14 +240,14 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von GitHub ist blockiert.</p>
+      <p>GitHub in neuem Tab öffnen:</p>
       <button class="open-button" onclick="openURL('https://github.com')">
-        In neuem Tab öffnen
+        GitHub öffnen
       </button>
     </div>
   </div>
 
-  <!-- StackOverflow -->
+  <!-- StackOverflow: Fallback auf Button -->
   <div id="stackoverflow-window" class="window">
     <div class="window-header">
       <div class="window-title">🧱 StackOverflow</div>
@@ -248,14 +256,14 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von StackOverflow ist blockiert.</p>
+      <p>StackOverflow in neuem Tab öffnen:</p>
       <button class="open-button" onclick="openURL('https://stackoverflow.com')">
-        In neuem Tab öffnen
+        StackOverflow öffnen
       </button>
     </div>
   </div>
 
-  <!-- Wikipedia -->
+  <!-- Wikipedia: API-gestützter Embed -->
   <div id="wikipedia-window" class="window">
     <div class="window-header">
       <div class="window-title">📚 Wikipedia</div>
@@ -264,10 +272,7 @@
       </div>
     </div>
     <div class="window-content">
-      <p>Einbetten von Wikipedia ist blockiert.</p>
-      <button class="open-button" onclick="openURL('https://de.wikipedia.org')">
-        In neuem Tab öffnen
-      </button>
+      <div id="wiki-content">Lade Artikel...</div>
     </div>
   </div>
 
