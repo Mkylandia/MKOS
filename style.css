@@ -171,9 +171,11 @@ body {
 .github         { background: linear-gradient(135deg, #333333, #6e5494); }
 .stackoverflow  { background: linear-gradient(135deg, #f48024, #e06f13); }
 .wikipedia      { background: linear-gradient(135deg, #000000, #666666); }
+.calculator     { background: linear-gradient(135deg, #4caf50, #087f23); }
+.notes          { background: linear-gradient(135deg, #ffeb3b, #fbc02d); }
 .start-button   { background: linear-gradient(135deg, #667eea, #764ba2); border: 2px solid rgba(255, 255, 255, 0.2); }
 
-/* Fenster (modale Fenster) - WICHTIG: Resize aktiviert */
+/* Fenster (modale Fenster) */
 .window {
   position: absolute;
   display: none;
@@ -186,8 +188,8 @@ body {
   min-height: 300px;
   max-width: 90vw;
   max-height: 90vh;
-  resize: both; /* Das macht Fenster resizable */
-  overflow: auto; /* Wichtig für resizing */
+  resize: both; /* Fenster ist resizable */
+  overflow: auto; /* nötig für resize */
   transition: opacity 0.3s ease;
 }
 
@@ -322,15 +324,15 @@ body {
   transform: translateY(-1px);
 }
 
-/* Spezielle Stile für App-Inhalte */
+/* YouTube-Suche */
 .youtube-player {
   padding: 20px;
   text-align: center;
 }
 
 .youtube-player input {
-  width: 70%;
-  padding: 12px;
+  width: 60%;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   margin-right: 10px;
@@ -338,7 +340,8 @@ body {
 }
 
 .youtube-player button {
-  padding: 12px 20px;
+  padding: 10px 16px;
+  margin-right: 10px;
   background: #ff0000;
   color: white;
   border: none;
@@ -363,6 +366,7 @@ body {
   border-radius: 8px;
 }
 
+/* App-Links */
 .app-links {
   padding: 20px;
   display: grid;
@@ -399,9 +403,9 @@ body {
   margin: 0;
   font-size: 12px;
   opacity: 0.7;
-  padding: 0;
 }
 
+/* Wikipedia-Artikel */
 #wiki-content {
   padding: 20px;
   line-height: 1.6;
@@ -418,4 +422,54 @@ body {
 #wiki-content p {
   margin-bottom: 15px;
   padding: 0;
+}
+
+/* Rechner */
+.calculator {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#calc-display {
+  width: 80%;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-align: right;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.calc-buttons button {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background: #f0f0f0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.calc-buttons button:hover {
+  background: #e0e0e0;
+}
+
+/* Notizen */
+#notes-area {
+  width: 90%;
+  height: 60%;
+  margin: 20px;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
 }
